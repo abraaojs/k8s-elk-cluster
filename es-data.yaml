@@ -1,18 +1,18 @@
-apiVersion: apps/v1beta1
+---
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: es-data
   namespace: elk
-  labels:
-    component: elasticsearch
-    role: data
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: elasticsearch
   template:
     metadata:
       labels:
-        component: elasticsearch
-        role: data
+        app: elasticsearch
     spec:
       initContainers:
       - name: init-sysctl
@@ -25,7 +25,7 @@ spec:
           privileged: true
       containers:
       - name: es-data
-        image: quay.io/pires/docker-elasticsearch-kubernetes:6.3.2
+        image: abraaojs/docker-elasticsearch-kubernetes:6.3.2
         env:
         - name: NAMESPACE
           valueFrom:
