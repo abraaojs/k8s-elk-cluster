@@ -4,11 +4,13 @@ metadata:
   name: kibana
   namespace: elk
   labels:
-    component: kibana
+    app: kibana
 spec:
   selector:
-    component: kibana
+    app: kibana
   ports:
   - name: http
     port: 80
     targetPort: http
+
+

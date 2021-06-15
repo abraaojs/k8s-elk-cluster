@@ -4,12 +4,10 @@ metadata:
   name: elasticsearch-ingest
   namespace: elk
   labels:
-    component: elasticsearch
-    role: ingest
+    app: elasticsearch
 spec:
   selector:
-    component: elasticsearch
-    role: ingest
+    app: elasticsearch
   ports:
   - name: http
     port: 9200

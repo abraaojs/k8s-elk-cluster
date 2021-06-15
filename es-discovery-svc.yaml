@@ -4,12 +4,10 @@ metadata:
   name: elasticsearch-discovery
   namespace: elk
   labels:
-    component: elasticsearch
-    role: master
+    app: elasticsearch
 spec:
   selector:
-    component: elasticsearch
-    role: master
+    app: elasticsearch
   ports:
   - name: transport
     port: 9300
