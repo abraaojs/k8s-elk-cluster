@@ -1,10 +1,3 @@
-# This project is no longer maintained
-
-As of November 7th, 2018, I've decided to end my commitment to maintaining this repo and related.
-
-It's been 3 years since I last used Elasticsearch, so I no longer have the motivation it takes to maintain and evolve this project. Also, other projects need all the attention I can give.
-
-It was a great run, **thank you all**.
 
 # kubernetes-elasticsearch-cluster
 Elasticsearch cluster on top of Kubernetes made easy.
@@ -58,19 +51,6 @@ Given this, I'm going to demonstrate how to provision a production grade scenari
 
 <a id="pre-requisites">
 
-## Pre-requisites
-
-* Kubernetes 1.11.x (tested with v1.11.2 on top of [Vagrant + CoreOS](https://github.com/pires/kubernetes-vagrant-coreos-cluster)).
-* `kubectl` configured to access the Kubernetes API.
-
-<a id="build-images">
-
-## Build images (optional)
-
-Providing one's own version of [the images automatically built from this repository](https://github.com/pires/docker-elasticsearch-kubernetes) will not be supported. This is an *optional* step. One has been warned.
-
-## Test
-
 ### Deploy
 
 ```shell
@@ -117,7 +97,7 @@ As we can assert, the cluster seems to be up and running. Easy, wasn't it?
 
 *Don't forget* that services in Kubernetes are only acessible from containers in the cluster. For different behavior one should [configure the creation of an external load-balancer](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer). While it's supported within this example service descriptor, its usage is out of scope of this document, for now.
 
-*Note:* if you are using one of the cloud providers which support external load balancers, setting the type field to "LoadBalancer" will provision a load balancer for your Service. You can uncomment the field in [es-svc.yaml](https://github.com/pires/kubernetes-elasticsearch-cluster/blob/master/es-svc.yaml).
+*Note:* if you are using one of the cloud providers which support external load balancers, setting the type field to "LoadBalancer" will provision a load balancer for your Service. You can uncomment the field in [es-svc.yaml](https://github.com/abraaojs/k8s-elk-cluster/blob/master/es-svc.yaml).
 
 ```shell
 kubectl get svc elasticsearch
@@ -255,7 +235,7 @@ The image used in this repo is very minimalist. However, one can install additio
   value: "repository-gcs,repository-s3"
 ```
 
-**Note:** The X-Pack plugin does not currently work with the `quay.io/pires/docker-elasticsearch-kubernetes` image. See Issue #102
+**Note:** The X-Pack plugin does not currently work with the `abraaojs/docker-elasticsearch-kubernetes` image. See Issue #102
 
 <a id="curator">
 
@@ -326,7 +306,7 @@ The default value for this environment variable is 2, meaning a cluster will nee
 
 ### How can I customize `elasticsearch.yaml`?
 
-Read a different config file by settings env var `ES_PATH_CONF=/path/to/my/config/` [(see the Elasticsearch docs for more)](https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html#config-files-location). Another option would be to build one's own image from  [this repository](https://github.com/pires/docker-elasticsearch-kubernetes)
+Read a different config file by settings env var `ES_PATH_CONF=/path/to/my/config/` [(see the Elasticsearch docs for more)](https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html#config-files-location). Another option would be to build one's own image from  [this repository](https://github.com/abraaojs//k8s-elk-cluster)
 
 ## Troubleshooting
 
@@ -366,7 +346,7 @@ Caused by: java.lang.IllegalArgumentException: No up-and-running site-local (pri
 ```
 
 This is related to how the container binds to network ports (defaults to ``_local_``). It will need to match the actual node network interface name, which depends on what OS and infrastructure provider one uses. For instance, if the primary interface on the node is `p1p1` then that is the value that needs to be set for the `NETWORK_HOST` environment variable.
-Please see [the documentation](https://github.com/pires/docker-elasticsearch#environment-variables) for reference of options.
+Please see [the documentation](https://github.com/abraaojs//k8s-elk-clusterh#environment-variables) for reference of options.
 
 In order to workaround this, set `NETWORK_HOST` environment variable in the pod descriptors as follows:
 
@@ -388,5 +368,4 @@ In order to workaround this, set `NETWORK_HOST` environment variable in the pod 
 ```
 
 About us
-
 At astechmind, we offer expert guidance, implementation support and services to help organisations accelerate their journey to the cloud. Our services include docker and container orchestration, cloud migration and adoption, infrastructure automation, application modernisation and remediation, and performance engineering.
