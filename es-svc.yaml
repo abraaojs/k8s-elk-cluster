@@ -12,5 +12,7 @@ spec:
     app: elasticsearch
   type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 9200
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 9200
